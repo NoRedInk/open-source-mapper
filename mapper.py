@@ -40,18 +40,18 @@ def main(org):
         f.write('## Language breakdown\n')
 
 
-        f.write('Language | Count\n')
-        f.write('----------------\n')
+        f.write('| Language | Count |\n')
+        f.write('|----------|-------|\n')
         for number, lang in list(languages_by_count.items())[::-1]:
-            f.write('{} | {}\n'.format(lang, number))
+            f.write('| {} | {} |\n'.format(lang, number))
 
         f.write('\n\n\n')
         f.write('## Repo breakdown\n')
 
-        f.write('Repo | Stars | Language | Forks | Issues\n')
-        f.write('----------------------------------------\n')
+        f.write('| Repo | Stars | Language | Forks | Issues |\n')
+        f.write('|------|-------|----------|-------|--------|\n')
         for repo in sorted(tailored_repos.values(), key=lambda x: x['stars'], reverse=True):
-            f.write('[{name}](http://github.com/{org}/{name}) | {stars} | {language} | {forks} | {issues}\n'.format(
+            f.write('| [{name}](http://github.com/{org}/{name}) | {stars} | {language} | {forks} | {issues} |\n'.format(
                 org=org,
                 name=repo['name'],
                 stars=repo['stars'],
