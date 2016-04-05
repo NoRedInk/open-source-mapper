@@ -26,7 +26,8 @@ def main(org):
             'stars': repo['stargazers_count'],
             'language': repo['language'],
             'forks': repo['forks_count'],
-            'issues': repo['open_issues']
+            'issues': repo['open_issues'],
+            'description': repo['description']
         }
 
     languages = [v['language'] for v in tailored_repos.values()]
@@ -48,16 +49,19 @@ def main(org):
         f.write('\n\n\n')
         f.write('## Repo breakdown\n')
 
-        f.write('| Repo | Stars | Language | Forks | Issues |\n')
-        f.write('|------|-------|----------|-------|--------|\n')
+        f.write('| Repo | Stars | Language | Forks | Issues | Description |\n')
+        f.write('|------|-------|----------|-------|--------|-------------|\n')
         for repo in sorted(tailored_repos.values(), key=lambda x: x['stars'], reverse=True):
-            f.write('| [{name}](http://github.com/{org}/{name}) | {stars} | {language} | {forks} | {issues} |\n'.format(
-                org=org,
-                name=repo['name'],
-                stars=repo['stars'],
-                language=repo['language'],
-                forks=repo['forks'],
-                issues=repo['issues'])
+            f.write(
+                '| [{name}](http://github.com/{org}/{name}) | {stars} | {language} | {forks} | {issues} | {description} |\n'.format(
+                    org=org,
+                    name=repo['name'],
+                    stars=repo['stars'],
+                    language=repo['language'],
+                    forks=repo['forks'],
+                    issues=repo['issues'],
+                    description=repo['description']
+                )
             )
 
 if __name__ == '__main__':
