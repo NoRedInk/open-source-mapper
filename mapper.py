@@ -31,7 +31,7 @@ def main(org):
 
     languages = [v['language'] for v in tailored_repos.values()]
     unique_languages = set(languages)
-    languages_by_count = { languages.count(lang) : lang for lang in unique_languages }
+    languages_by_count = { lang : languages.count(lang) for lang in unique_languages }
 
     with open('map.md', 'w') as f:
         f.write('We have {} repos written in {} languages\n'.format(len(tailored_repos), len(unique_languages)))
@@ -42,7 +42,7 @@ def main(org):
 
         f.write('| Language | Count |\n')
         f.write('|----------|-------|\n')
-        for number, lang in list(languages_by_count.items())[::-1]:
+        for number, lang in sorted(languages_by_count.items(), key=lambda x: x[1], reverse=True):
             f.write('| {} | {} |\n'.format(lang, number))
 
         f.write('\n\n\n')
