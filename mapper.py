@@ -51,12 +51,13 @@ def main(org):
         f.write('Repo | Stars | Language | Forks | Issues\n')
         f.write('----------------------------------------\n')
         for repo in sorted(tailored_repos.values(), key=lambda x: x['stars'], reverse=True):
-            f.write('{} | {} | {} | {} | {}\n'.format(
-                repo['name'],
-                repo['stars'],
-                repo['language'],
-                repo['forks'],
-                repo['issues'])
+            f.write('[{name}](http://github.com/{org}/{name}) | {stars} | {language} | {forks} | {issues}\n'.format(
+                org=org,
+                name=repo['name'],
+                stars=repo['stars'],
+                language=repo['language'],
+                forks=repo['forks'],
+                issues=repo['issues'])
             )
 
 if __name__ == '__main__':
